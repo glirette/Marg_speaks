@@ -1,0 +1,42 @@
+{
+  "schema": "greg-lirette-public-case-archive-status-v1",
+  "updatedDate": "2026-06-08",
+  "repository": "glirette/Marg_speaks",
+  "caseFocus": {
+    "victim": "Jaren Lockhart",
+    "jurisdictionFocus": [
+      "Jefferson Parish, Louisiana",
+      "New Orleans area public crime/court documentation"
+    ],
+    "archivePurpose": "Preserve an early GitHub-published crime/court tracking artifact and add a current public-source status note."
+  },
+  "archiveNote": {
+    "originalArtifact": "default.htm",
+    "publicationContext": "GitHub was used as one experimental publishing channel. It was not the final live blog system.",
+    "preservationIntent": "Original tracked files are preserved so the repo remains provenance evidence rather than a rewritten history."
+  },
+  "people": [
+    {
+      "name": "Terry Christopher Speaks",
+      "statusSummary": "Convicted of second degree murder, obstruction of justice, and conspiracy to obstruct justice; convictions and sentences affirmed by the Louisiana Fifth Circuit Court of Appeal.",
+      "sentenceSummary": "Life imprisonment at hard labor without benefit of parole, probation, or suspension of sentence on the second degree murder count, with additional obstruction-related sentences described in the appellate opinion.",
+      "sources": [
+        "https://cases.justia.com/louisiana/fifth-circuit-court-of-appeal/2016-16-ka-163.pdf?ts=1481137709",
+        "https://www.wdsu.com/article/terry-speaks-sentenced-to-life-without-parole-in-murder-of-jaren-lockhart/3378427"
+      ]
+    },
+    {
+      "name": "Margaret A. Sanchez",
+      "statusSummary": "Pleaded guilty in Jaren Lockhart's death and dismemberment according to public reporting.",
+      "sentenceSummary": "WDSU reported that Sanchez was sentenced to 40 years in prison.",
+      "sources": [
+        "https://www.wdsu.com/article/margaret-sanchez-pleads-guilty-to-jaren-lockharts-death-dismemberment/3237389"
+      ]
+    }
+  ],
+  "limits": [
+    "This is not an official court record.",
+    "This is not legal advice.",
+    "Future updates may add official docket records, sentencing minutes, and additional public sources."
+  ]
+}
