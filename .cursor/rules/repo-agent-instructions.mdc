@@ -1,0 +1,12 @@
+---
+description: Marg Speaks public archive agent instructions.
+alwaysApply: true
+---
+
+# Repository Instructions
+
+Follow `AGENTS.md` for this repository.
+
+This is a public archive. Keep instructions and content public-safe, source-backed, and portable across local clones, cloud workspaces, and other agents.
+
+Do not add private Notary Geek strategy, customer data, private messages, raw accusations, or required references to one PC's filesystem. Use repo-relative paths for local files and public URLs for source records.
