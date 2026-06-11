@@ -17,6 +17,8 @@ See [updates/2026-06-08-case-status.md](updates/2026-06-08-case-status.md) for t
 
 Machine-readable status is available at [data/case-status-2026-06-08.json](data/case-status-2026-06-08.json).
 
+Future agents should read [AGENTS.md](AGENTS.md) before changing this archive.
+
 ## Why This Repo Exists
 
 This repository matters less as a modern website and more as provenance.
