@@ -1,23 +1,34 @@
-# Repository Roadmap
+# Publication roadmap
 
-This repository is being kept as a preserved case archive, not as a current daily news site.
+New Orleans Crime begins with the Jaren Lockhart case and grows through additional
+reviewed stories about crime, courts, records and accountability in New Orleans
+and the surrounding parishes.
 
-## Near-Term Cleanup
+## Implemented in the website layer
 
-- Preserve the original `default.htm` artifact.
-- Add clear current-status notes with public sources.
-- Add machine-readable status data for future indexing.
-- Keep the README clear enough that visitors understand why the repo exists.
+- Shared publication homepage, about page and source standards.
+- A detailed first case file, source-linked chronology, source index and archive guide.
+- Search/filter controls with readable no-JavaScript fallbacks.
+- Dated source data and explicit current-status gaps.
+- Original HTML and tracked support files preserved unchanged.
+- Azure Static Web Apps package and a separate manual production workflow.
 
-## Possible Future Updates
+## Before public launch
 
-- Add official docket references and sentencing minutes if obtained.
-- Add a concise case timeline.
-- Add a source index separating court records, media reports, and archived public materials.
-- Add archival notes explaining which earlier live-blog materials existed outside GitHub.
+- Review and merge the website change.
+- Select/provision the Azure host and validate the chosen domain.
+- Run the host smoke check documented in `docs/hosting.md`.
 
-## Broader Direction
+## Continuing editorial work
 
-This archive may sit alongside future public repositories about crime, courts, public records, and accountability, especially Orleans Parish and Jefferson Parish matters.
+- Seek the official Supreme Court action sheet behind the October 2017 report.
+- Obtain certified plea/sentencing minutes and current custody records before
+  making claims those records would establish.
+- Check later state and federal case history through appropriate court records.
+- Add later verified developments as dated updates without overwriting the original.
+- Export this reviewed case into the broader publication alongside other case repositories.
+  Keep research about this case here; do not add unrelated case research.
 
-The goal is not volume for its own sake. The goal is source-backed documentation that is careful about the difference between allegation, charge, conviction, sentence, appeal, and public commentary.
+Public research, source checks and open verification work stay in this repository
+under `docs/research/`. Research notes clearly identify unresolved questions.
+Public timelines must never imply a complete docket or automated live monitoring.

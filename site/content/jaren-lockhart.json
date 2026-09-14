@@ -1,0 +1,71 @@
+{
+  "schema": "new-orleans-crime-case-v1",
+  "slug": "jaren-lockhart",
+  "reviewedDate": "2026-09-14",
+  "reviewScope": "Public-source review of documented historical outcomes. Present custody, release eligibility, and later proceedings have not been independently verified. A search without a new result does not prove that no later proceedings exist.",
+  "sources": [
+    {
+      "id": "appeal-2016",
+      "type": "Court record",
+      "title": "State of Louisiana v. Terry Speaks, No. 16-KA-163",
+      "publisher": "Louisiana Fifth Circuit Court of Appeal, hosted by Justia",
+      "date": "2016-12-07",
+      "checkedDate": "2026-09-14",
+      "url": "https://cases.justia.com/louisiana/fifth-circuit-court-of-appeal/2016-16-ka-163.pdf?ts=1481137709",
+      "format": "PDF · 67 PDF pages",
+      "description": "Appellate decision affirming the convictions and sentences. Printed pp. 1, 34–36 and 63 identify the procedural history, sentence changes and disposition.",
+      "limit": "A court opinion hosted by a third party, not a certified docket or a current custody record. The opinion contains graphic descriptions."
+    },
+    {
+      "id": "plea-2016",
+      "type": "Official account",
+      "title": "Metairie woman pleads guilty to death, dismemberment of Jaren Lockhart",
+      "publisher": "Jefferson Parish District Attorney’s Office",
+      "date": "2016-06-20",
+      "checkedDate": "2026-09-14",
+      "url": "https://www.jpda.us/metairie-woman-pleads-guilty-to-death-dismemberment-of-jaren-lockhart/",
+      "format": "Web article",
+      "description": "Prosecutor’s contemporary account of Sanchez’s plea, each sentence and their concurrent operation. Also describes the enhanced sentence imposed on Speaks.",
+      "limit": "An official prosecuting-agency account, not the plea transcript or certified sentencing minutes. Its custody references describe 2016."
+    },
+    {
+      "id": "supreme-report-2017",
+      "type": "Reporting",
+      "title": "No appeal for New Orleans murderer",
+      "publisher": "WXXV News 25",
+      "date": "2017-10-17",
+      "checkedDate": "2026-09-14",
+      "url": "https://www.wxxv25.com/no-appeal-new-orleans-murderer/",
+      "format": "Web article",
+      "description": "Reports that the Louisiana Supreme Court declined Speaks’s request for review, leaving the appellate decision standing.",
+      "limit": "The underlying action sheet and exact ruling date were not obtained in this review. October 17 is the publication date, not an independently verified order date."
+    },
+    {
+      "id": "original-archive",
+      "type": "Archive",
+      "title": "Marg Speaks: original preserved page",
+      "publisher": "Greg Lirette",
+      "date": null,
+      "checkedDate": "2026-09-14",
+      "url": "/stories/jaren-lockhart/archive/",
+      "format": "Historical HTML archive",
+      "description": "The original Word-exported case-tracking page, whose visible last-update statement says October 20, 2014. A contextual archive page links to the unchanged artifact.",
+      "limit": "Historical reporting and commentary, not current case status. Legacy links and Office support-file references may no longer work."
+    }
+  ],
+  "timeline": [
+    {"id":"death","date":"2012-06-06","category":"Background","title":"Jaren Lockhart is killed","text":"The district attorney identifies June 6 as the date of her death.","source":"plea-2016","locator":"Background account"},
+    {"id":"indictment","date":"2014-08-14","category":"Court proceedings","title":"Grand jury indictment","text":"Speaks and Sanchez are indicted in Jefferson Parish.","source":"appeal-2016","locator":"Printed p. 1, including footnote 1"},
+    {"id":"arraignment","date":"2014-10-20","category":"Court proceedings","title":"Speaks pleads not guilty","text":"The appellate history records his arraignment and plea.","source":"appeal-2016","locator":"Printed p. 1"},
+    {"id":"original-page","date":"2014-10-20","category":"Archive updates","title":"The original page’s stated update date","text":"This is the date displayed in the preserved page, not an independently established publication timestamp.","source":"original-archive","locator":"Opening paragraph"},
+    {"id":"severance","date":"2015-01-12","category":"Court proceedings","title":"Separate trials","text":"The State severs the defendants for trial.","source":"appeal-2016","locator":"Printed p. 1, footnote 2"},
+    {"id":"verdict","date":"2015-06-19","category":"Court proceedings","title":"Jury verdict in Speaks’s trial","text":"Guilty on all three counts.","source":"appeal-2016","locator":"Printed pp. 1, 34 and 36, footnote 21"},
+    {"id":"sentencing","date":"2015-07-09","category":"Court proceedings","title":"Initial sentencing","text":"Life for murder; 40 years for obstruction; 20 years for conspiracy.","source":"appeal-2016","locator":"Printed pp. 34–35"},
+    {"id":"enhancement","date":"2016-01-22","category":"Court proceedings","title":"Obstruction sentence enhanced","text":"The original 40-year obstruction sentence is replaced with life imprisonment under the habitual-offender statute.","source":"appeal-2016","locator":"Printed pp. 35–36"},
+    {"id":"plea","date":"2016-06-20","category":"Court proceedings","title":"Sanchez enters guilty pleas","text":"Manslaughter and two obstruction-related offenses; concurrent sentences of 40, 40 and 20 years.","source":"plea-2016","locator":"Plea and sentencing account"},
+    {"id":"appeal","date":"2016-12-07","category":"Court proceedings","title":"Convictions and sentences affirmed","text":"The Louisiana Fifth Circuit affirms.","source":"appeal-2016","locator":"Printed p. 63"},
+    {"id":"supreme-report","date":"2017-10-17","category":"Court proceedings","title":"Supreme Court review denial reported","text":"WXXV reports that the Louisiana Supreme Court declined review. This is the report date; the underlying order was not obtained.","source":"supreme-report-2017","locator":"Publication date; exact order date unverified"},
+    {"id":"archive-refresh","date":"2026-06-08","category":"Archive updates","title":"Repository status note added","text":"A dated update explains the archive’s provenance and summarizes the earlier case outcomes.","source":"original-archive","locator":"June 2026 status note"},
+    {"id":"current-review","date":"2026-09-14","category":"Archive updates","title":"Public sources reviewed for this case file","text":"Court and prosecuting-agency sources were reviewed alongside the 2017 report. Present custody and subsequent proceedings remain unverified.","source":"original-archive","locator":"September 2026 public source review"}
+  ]
+}
