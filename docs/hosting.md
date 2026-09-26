@@ -10,7 +10,9 @@ DNS record, certificate, or public deployment is created by this change.
 - `npm run build` creates a **noindex preview** in `dist/`.
 - Set `SITE_URL=https://neworleanscrime.org` when building for that production host.
   A production build writes matching canonical URLs, an XML sitemap and Article
-  structured data. Omit the value for previews; never use a production build for
+  structured data. The value must be a literal HTTPS origin, with an optional
+  trailing slash; credentials, paths, query strings, fragments, whitespace, and
+  URL-parser repairs are rejected. Omit the value for previews; never use a production build for
   an unrelated preview hostname.
 - `npm run preview` serves the built files locally on port 4173. This small server
   is a development aid, not an Azure production server.
@@ -18,7 +20,16 @@ DNS record, certificate, or public deployment is created by this change.
 Only `dist/` is uploaded. It contains seven modern pages, a 404 page, static assets,
 public source data and dated updates, and the original HTML/support files. The
 repository root is not a deployment directory. The old Office lock file stays in
-Git for provenance and is not served.
+Git for provenance and is not served. The copy manifest names each asset and
+archive file individually; extra files in those directories are not published,
+and symlinks at copied paths are rejected. Content validation rejects unsafe
+source URLs, invalid calendar dates, duplicate IDs, unresolved citations, and
+unregistered case slugs before replacing the existing output.
+
+`npm test` includes isolated synthetic builds for these failure paths and local
+HTTP checks for preview errors, redirects, headers, and file containment. The
+fixtures do not contact source providers or deploy anything. Browser QA remains
+a separate check; passing Node tests does not establish rendered behavior.
 
 ## Recommended initial host
 

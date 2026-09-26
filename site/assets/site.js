@@ -23,10 +23,16 @@ for (const list of document.querySelectorAll('[data-filter-list]')) {
   input.addEventListener('input', update);
   list.querySelector('.reset-filters').addEventListener('click', () => { category = 'all'; input.value = ''; update(); input.focus(); });
   // A source citation with a fragment must reveal its target even after filtering.
-  window.addEventListener('hashchange', () => {
+  function revealFragment() {
     const target = rows.find(row => `#${row.id}` === window.location.hash);
     if (target) {category = 'all'; input.value = ''; update(); target.scrollIntoView();}
-  });
+    else update();
+  }
+  window.addEventListener('hashchange', revealFragment);
+  // Re-entering the same fragment fires popstate without a hashchange.
+  window.addEventListener('popstate', revealFragment);
+  // History navigation can restore input values after this script first runs.
+  window.addEventListener('pageshow', update);
   bar.hidden = false;
   count.hidden = false;
   update();

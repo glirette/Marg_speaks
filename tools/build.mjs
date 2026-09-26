@@ -1,18 +1,32 @@
-import { mkdir, readFile, writeFile, cp, rm } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, copyFile, rm, lstat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, join } from 'node:path';
 import { page, escape } from '../site/lib/html.mjs';
 import * as render from '../site/lib/render.mjs';
+import { siteOrigin, validateContent } from '../site/lib/validate.mjs';
 const repo = fileURLToPath(new URL('../', import.meta.url));
 const output = join(repo, 'dist');
+const origin = siteOrigin(process.env.SITE_URL || '');
+const publicFiles = [
+  'site/assets/favicon.svg', 'site/assets/site.css', 'site/assets/site.js',
+  'default.htm', 'default_files/colorschememapping.xml',
+  'default_files/filelist.xml', 'default_files/themedata.thmx',
+  'googlee801e58c75ba074d.html'
+];
+const contentFiles = ['site/content/publication.json', 'site/content/jaren-lockhart.json',
+  'updates/2026-06-08-case-status.md', 'updates/2026-09-14-case-status.md',
+  'data/case-status-2026-06-08.json'];
+// A symlink must not smuggle an unreviewed file through any build input path.
+for (const name of [...publicFiles, ...contentFiles]) {
+  const parts = name.split('/');
+  for (let i = 1; i <= parts.length; i++) {
+    const entry = await lstat(join(repo, ...parts.slice(0, i)));
+    if (entry.isSymbolicLink() || (i === parts.length ? !entry.isFile() : !entry.isDirectory())) throw new Error('Invalid public asset type');
+  }
+}
 const publication = JSON.parse(await readFile(join(repo, 'site/content/publication.json'), 'utf8'));
 const data = JSON.parse(await readFile(join(repo, 'site/content/jaren-lockhart.json'), 'utf8'));
-let origin = process.env.SITE_URL || '';
-if (origin) {
-  const parsed = new URL(origin);
-  if (parsed.protocol !== 'https:' || parsed.pathname !== '/' || parsed.search || parsed.hash || parsed.username || parsed.password) throw new Error('SITE_URL must be an HTTPS origin without a path, query, credentials or fragment');
-  origin = parsed.origin;
-}
+validateContent(publication, data);
 const publicRoutes = [];
 await rm(output, {recursive:true, force:true});
 await mkdir(output, {recursive:true});
@@ -38,9 +52,12 @@ for (const story of publication.stories) {
 await add('/about/','About', 'About New Orleans Crime, an independent publication by Greg Lirette.',render.about,'About');
 await add('/standards/','Sources & standards','How New Orleans Crime cites records, distinguishes case outcomes and handles corrections.',render.standards,'Sources & standards');
 await add('/404.html','Page not found','This page could not be found.', '<div class="wrap simple-page"><h1>Page not found</h1><p class="dek">The address may have changed, or the page may not exist.</p><p><a href="/">Return to the stories</a></p></div>', '');
-await cp(join(repo,'site/assets'),join(output,'assets'),{recursive:true});
-// Publish only explicit public assets. Never copy the repository root or internal notes.
-for (const name of ['default.htm','default_files','googlee801e58c75ba074d.html']) await cp(join(repo,name),join(output,name),{recursive:true});
+// Copy individual reviewed files, never a directory's future contents.
+for (const name of publicFiles) {
+  const target = join(output, name.replace(/^site\//, ''));
+  await mkdir(resolve(target, '..'), {recursive:true});
+  await copyFile(join(repo, name), target);
+}
 for (const name of ['2026-06-08-case-status.md','2026-09-14-case-status.md']) await write(`/updates/${name}`, await readFile(join(repo,'updates',name),'utf8'));
 await write('/data/jaren-lockhart.json', `${JSON.stringify(data,null,2)}\n`);
 await write('/data/case-status-2026-06-08.json', await readFile(join(repo,'data/case-status-2026-06-08.json'),'utf8'));
