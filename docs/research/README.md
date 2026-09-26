@@ -6,6 +6,9 @@ research about other cases belongs elsewhere.
 
 Start with the [September 14, 2026 source review](2026-09-14-source-review.md),
 which records source support, access limits, and the open verification queue.
+The [September 26 later-record check](2026-09-26-later-record-check.md) records
+additional court and custody lookup limits, a separate case-number lead, and
+the unresolved identity matches. It depends on the still-unmerged case file in PR #5.
 
 - [Open issues](https://github.com/glirette/Marg_speaks/issues)
 - [Public pull requests](https://github.com/glirette/Marg_speaks/pulls)

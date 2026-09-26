@@ -7,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {escape} from '../site/lib/html.mjs';
+import {validateContent} from '../site/lib/validate.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=join(root,'dist');
 const build=(extra={})=>execFileSync(process.execPath,['tools/build.mjs'],{cwd:root,env:{...process.env,SITE_URL:'',...extra},encoding:'utf8',stdio:['ignore','pipe','pipe']});
@@ -36,8 +37,23 @@ test('timeline dates and citations have a valid source and honest review limits'
  for(const source of data.sources){assert.equal(source.checkedDate,data.reviewedDate);assert.ok(source.limit);assert.ok(source.url.startsWith('https://')||source.url.startsWith('/stories/'));}
  assert.match(data.reviewScope,/not been independently verified/);
  const report=data.timeline.find(e=>e.id==='supreme-report');assert.match(report.text,/report date/);
+ assert.equal(report.dateKind,'reportPublication');
+ assert.equal(report.date,data.sources.find(s=>s.id===report.source).date);
+ assert.match(await read('dist/stories/jaren-lockhart/timeline/index.html'),/Report published October 17, 2017/);
+ assert.match(await read('dist/stories/jaren-lockhart/index.html'),/Speaks trial case/);
  assert.match(await read('dist/stories/jaren-lockhart/index.html'),/concurrently/);
  assert.doesNotMatch(await read('dist/stories/jaren-lockhart/index.html'),/first degree murder/);
+});
+test('a reporting publication date cannot be silently promoted to an order date',async()=>{
+ const original=JSON.parse(await read('site/content/jaren-lockhart.json'));
+ const pub=JSON.parse(await read('site/content/publication.json'));
+ const copy=()=>structuredClone(original);
+ const unmarked=copy();delete unmarked.timeline.find(e=>e.id==='supreme-report').dateKind;
+ assert.throws(()=>validateContent(pub,unmarked),/Reporting source needs an explicit event or publication date kind/);
+ const wrongDate=copy();wrongDate.timeline.find(e=>e.id==='supreme-report').date='2017-10-16';
+ assert.throws(()=>validateContent(pub,wrongDate),/Reported event must use the source publication date/);
+ const wrongSource=copy();wrongSource.timeline.find(e=>e.id==='supreme-report').source='appeal-2016';
+ assert.throws(()=>validateContent(pub,wrongSource),/Non-report event cannot use a report publication date/);
 });
 test('historical artifacts are unchanged in the working tree and build',async()=>{
  const base='803ebd9b719cd7034b9465a74edc54b673b3cca1';
