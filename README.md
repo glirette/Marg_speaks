@@ -40,6 +40,7 @@ manual production workflow and remaining host setup.
 Public source review: **September 14, 2026**.
 
 - [Public review note](updates/2026-09-14-case-status.md)
+- [Later-record investigation and access limits](docs/research/2026-09-26-later-record-check.md)
 - [Case data and source ledger](site/content/jaren-lockhart.json)
 - [Earlier June status note](updates/2026-06-08-case-status.md)
 - [Original machine-readable June status](data/case-status-2026-06-08.json)

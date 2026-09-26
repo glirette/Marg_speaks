@@ -46,6 +46,7 @@ export function validateContent(publication, data) {
   text(data.reviewScope, 'review scope');
   if (!Array.isArray(data.sources) || !data.sources.length || !Array.isArray(data.timeline) || !data.timeline.length) fail('Sources and timeline must be nonempty arrays');
   const sourceIds = new Set();
+  const sourceById = new Map();
   const eventIds = new Set();
   const id = (value, seen) => {
     if (typeof value !== 'string' || !/^[a-z][a-z0-9-]*$/.test(value) || value === 'main' || seen.has(value)) fail('Invalid or duplicate content ID');
@@ -54,6 +55,7 @@ export function validateContent(publication, data) {
   for (const source of data.sources) {
     if (!source || typeof source !== 'object') fail('Invalid source');
     id(source.id, sourceIds);
+    sourceById.set(source.id, source);
     if (!['Court record', 'Official account', 'Reporting', 'Archive'].includes(source.type)) fail('Invalid source type');
     for (const key of ['title', 'publisher', 'format', 'description', 'limit']) text(source[key], `source ${key}`);
     safeUrl(source.url);
@@ -78,5 +80,12 @@ export function validateContent(publication, data) {
     if (!['Background', 'Court proceedings', 'Archive updates'].includes(event.category)) fail('Invalid event category');
     for (const key of ['title', 'text', 'locator']) text(event[key], `event ${key}`);
     if (!sourceIds.has(event.source)) fail('Unknown event source');
+    // A report publication date must not silently become the court-action date.
+    // Keep that distinction executable when the timeline is edited later.
+    const source = sourceById.get(event.source);
+    if (source.type === 'Reporting') {
+      if (event.dateKind !== 'reportPublication' && event.dateKind !== 'event') fail('Reporting source needs an explicit event or publication date kind');
+      if (event.dateKind === 'reportPublication' && event.date !== source.date) fail('Reported event must use the source publication date');
+    } else if (event.dateKind !== undefined) fail('Non-report event cannot use a report publication date');
   }
 }
